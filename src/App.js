@@ -27,8 +27,6 @@ class App extends React.Component {
           this.setState({
             id: snapShot.id,
             ...snapShot.data()
-          }, () => {
-            console.log(this.state)
           });
         });
         
