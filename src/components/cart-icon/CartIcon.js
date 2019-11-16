@@ -1,13 +1,22 @@
-import React from 'react'
+import React from "react";
+import { connect } from "react-redux";
 
-import { ReactComponent as ShoppingIcon } from '../../assets/shopping-bag.svg'
+import { toogleCartHidden } from "../../redux/cart/cart-actions";
 
-import './CartIcon.scss'
+import { ReactComponent as ShoppingIcon } from "../../assets/shopping-bag.svg";
 
-const CartIcon = () => (
-  <div className="cart-icon">
-    <ShoppingIcon className="shopping-icon"/>
+import "./CartIcon.scss";
+// import { dispatch } from "rxjs/internal/observable/pairs";
+
+const CartIcon = ({ toogleCartHidden }) => (
+  <div className="cart-icon" onClick={toogleCartHidden} >
+    <ShoppingIcon className="shopping-icon" />
     <span className="item-count">0</span>
   </div>
-)
-export default CartIcon
+);
+
+const mapDispatchToProps = dispatch => ({
+  toogleCartHidden: () => dispatch(toogleCartHidden())
+});
+
+export default connect(null, mapDispatchToProps)(CartIcon);
