@@ -1,23 +1,14 @@
 import React from "react";
+import { createStructuredSelector } from 'reselect'
 
-import SHOP_DATA from "./shop.data.js";
+import  CollectionOverview  from "../../components/collection-overview/CollectionOverview"
 
-import CollectionPreview from '../../components/collectionPreview/CollectionPreview'
 
-class ShopPage extends React.Component {
-  state = {
-    collections: SHOP_DATA
-  };
-  render() {
-    const {collections} = this.state;
+  const ShopPage = ({collections})=>  {
     return (<div className='shop-page'>
-      {
-        collections.map(({ id, ...otherCollectionProps })=>(
-          <CollectionPreview key={id} {...otherCollectionProps} />
-        ))
-      }
+   <CollectionOverview/>
     </div>);
   }
-}
+
 
 export default ShopPage;
