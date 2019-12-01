@@ -20,12 +20,10 @@ export const fetchCollectionStartAsync = ()=> {
   console.log("cooool")
   return dispatch => {
     const collectionRef = firestore.collection('collection');
-    console.log("collectionRef", collectionRef)
     dispatch(fetchCollectionStart())
     collectionRef.get().then(snapshot => {
       const collectionMap = convertCollectionsSnapshotToMap(snapshot);
-      console.log("collectionMap",collectionMap)
       dispatch(fetchCollectionSucces(collectionMap));
-    }).catch(error=> dispatch(fetchCollectionFailure(error.message)))
+    }).catch(error=> dispatch(fetchCollectionFailure(error)))
   }
 }

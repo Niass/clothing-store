@@ -11,6 +11,7 @@ import { toogleCartHidden } from '../../redux/cart/cart-actions';
 import './CartDropdown.scss';
 
 function CartDropdown({ cartItems, history, dispatch }) {
+  console.log("history",history)
   return (
     <div className="cart-dropdown">
       <div className="cart-items">
@@ -24,6 +25,9 @@ function CartDropdown({ cartItems, history, dispatch }) {
       </div>
       <CustomButton
         onClick={() => {
+          console.log("history",history)
+          {/* pathname: "/shop/checkout" */}
+          history.location.pathname = "/"
           history.push('./checkout');
           dispatch(toogleCartHidden());
         }}
