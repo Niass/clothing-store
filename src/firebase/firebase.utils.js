@@ -46,14 +46,14 @@ export const addCollectionAndDocuments = async (
   const batch = firestore.batch();
   objectsToAdd.forEach(obj => {
     const newDocRef = collectionRef.doc();
-    console.log(newDocRef)
+    console.log(newDocRef);
     batch.set(newDocRef, obj);
   });
   return await batch.commit();
 };
 
 export const convertCollectionsSnapshotToMap = collections => {
-  console.log("collections",collections)
+  console.log('collections', collections);
   const transformedCollection = collections.docs.map(doc => {
     const { title, items } = doc.data();
     // console.log("items",items)
@@ -66,12 +66,21 @@ export const convertCollectionsSnapshotToMap = collections => {
     };
   });
   // console.log("transformedCollection",transformedCollection)
-  const result= transformedCollection.reduce((acc, collection) => {
+  const result = transformedCollection.reduce((acc, collection) => {
     acc[collection.title.toLowerCase()] = collection;
     return acc;
   }, {});
   // console.log("result",result)
   return result;
+};
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged(userAuth => {
+      unsubscribe();
+      resolve(userAuth);
+    }, reject);
+  });
 };
 
 firebase.initializeApp(config);
